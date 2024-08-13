@@ -1,0 +1,28 @@
+.dropdown {
+  height: 50px; /* 드롭다운의 높이를 키웁니다 */
+  padding: 10px 12px; /* 내부 여백을 키워서 텍스트와 화살표에 충분한 공간을 제공합니다 */
+  font-size: 16px;
+  font-weight: 200;
+  color: var(--textSoft);
+  background-color: var(--bgSoft);
+  border: 1px solid var(--borderSoft);
+  border-radius: 10px;
+  outline: none;
+  width: 250px; /* 가로 크기를 조절합니다 */
+  box-sizing: border-box;
+  appearance: none; /* 기본 드롭다운 화살표 제거 */
+  background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path fill="none" stroke="%23FFF" stroke-width="2" d="M1 1l5 5 5-5"/></svg>') no-repeat right 12px center;
+  background-color: var(--bgSoft);
+  background-size: 12px 8px; /* 화살표 크기 조절 */
+  margin-bottom: 20px; /* 차트와의 간격 */
+}
+
+.dropdown:focus {
+  border-color: var(--highlight);
+}
+
+.dropdown option {
+  font-weight: 200;
+  color: var(--textSoft);
+  background-color: var(--bgSoft);
+}
