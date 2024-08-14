@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import PriceInfo from "../ui/dashboard/priceinfo/PriceInfo";
-import Dropdown from "../ui/dashboard/dropdown/Dropdown";
+import Dropdown from "../ui/dashboard/dropdown/dropdown";
 
 const Page = () => {
   const [selectedItem, setSelectedItem] = useState('');
