@@ -1,0 +1,63 @@
+.price-info-container {
+    background-color: #1b1c1e; /* 어두운 배경색 */
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+  }
+  
+  .selection-info p {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .forecast-info {
+    background-color: #2c2d30;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .forecast-text {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .forecast-highlight {
+    color: #00aaff; /* 하이라이트 색상 */
+  }
+  
+  .price-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .price-block {
+    background-color: #2c2d30;
+    padding: 15px;
+    border-radius: 8px;
+    width: 48%;
+  }
+  
+  .price-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .price-detail {
+    font-size: 1em;
+  }
+  
+  .price-amount {
+    font-weight: bold;
+    color: #00ff00; /* 가격 색상 */
+  }
+  
+  .no-data, .no-selection {
+    text-align: center;
+    color: #ff6b6b; /* 경고 색상 */
+    font-size: 1.2em;
+  }
+  
+  

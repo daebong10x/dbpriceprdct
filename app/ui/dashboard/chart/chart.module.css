@@ -1,12 +1,35 @@
-.container {
-    height: 450px;
-    background-color: var(--bgSoft);
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .title{
-    font-weight: 200;
-    color: var(--textSoft);
-    margin-bottom: 20px;
-  }
+.chartContainer {
+  width: 70%; /* 전체 너비의 70% 사용 */
+  max-width: 500px; /* 최대 너비를 500px로 설정 */
+  margin: 20px auto; /* 가운데 정렬 */
+  padding: 10px; /* 패딩을 더 줄임 */
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chartContainer canvas {
+  width: 100% !important; /* 캔버스 너비를 100%로 설정 */
+  height: 300px !important; /* 캔버스 높이를 강제로 설정 */
+}
+
+.chartTitle {
+  font-size: 0.9em; /* 제목의 크기를 더 줄임 */
+  text-align: center;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.chartLegend {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.8em; /* 범례 크기 축소 */
+  color: #ccc;
+}
+
+.chartNoData {
+  text-align: center;
+  font-size: 1em;
+  color: #999;
+  padding: 30px 0;
+}
