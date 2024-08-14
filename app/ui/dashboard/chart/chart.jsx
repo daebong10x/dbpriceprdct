@@ -2,13 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 
-const ChartComponent = ({ selectedItem }) => {
+const ChartComponent = ({ selectedItem, selectedWeight, selectedDetail, price, nextWeekPrice }) => {
   const [chartData, setChartData] = useState(null);
   const chartRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!selectedItem) return;
+      if (!selectedItem || !selectedWeight || !selectedDetail) return;
 
       const sheetName = `${selectedItem}_차트데이터`;
       try {
@@ -20,13 +20,13 @@ const ChartComponent = ({ selectedItem }) => {
           return;
         }
 
-        const labels = Array.from(new Set(data.slice(1).map(row => row[0].replace(/^\d+년/, '')))); // 연도 제거
+        const labels = Array.from(new Set(data.slice(1).map(row => row[0].replace(/^\d+년/, ''))));
         const prices2023 = Array(labels.length).fill(null);
         const prices2024 = Array(labels.length).fill(null);
 
         data.slice(1).forEach(row => {
           const [date, price] = row;
-          const week = date.replace(/^\d+년/, ''); // 연도 제거 후 주차만 추출
+          const week = date.replace(/^\d+년/, '');
           const index = labels.indexOf(week);
 
           if (index !== -1) {
@@ -38,23 +38,18 @@ const ChartComponent = ({ selectedItem }) => {
           }
         });
 
-        // 7월 3주와 7월 4주 인덱스 찾기
         const highlightIndex3rdWeek = labels.indexOf('7월3주');
         const highlightIndex4thWeek = labels.indexOf('7월4주');
 
         setChartData({
-          labels: labels, // 연도가 제거된 라벨을 사용
+          labels: labels,
           datasets: [
             {
               label: `2023년 ${selectedItem} 가격`,
               data: prices2023,
               borderColor: 'rgba(75,192,192,1)',
               backgroundColor: 'rgba(75,192,192,0.2)',
-              pointBackgroundColor: prices2023.map((_, index) =>
-                index === highlightIndex3rdWeek ? 'yellow' :
-                index === highlightIndex4thWeek ? 'green' : 
-                'rgba(75,192,192,1)'
-              ), // 강조된 점의 크기 설정
+              pointBackgroundColor: 'rgba(75,192,192,1)',
             },
             {
               label: `2024년 ${selectedItem} 가격`,
@@ -65,10 +60,10 @@ const ChartComponent = ({ selectedItem }) => {
                 index === highlightIndex3rdWeek ? 'yellow' :
                 index === highlightIndex4thWeek ? 'green' : 
                 'rgba(192,75,75,1)'
-              ), // 7월 3주에 노란색, 7월 4주에 초록색 적용
+              ),
               pointRadius: prices2024.map((_, index) =>
                 index === highlightIndex3rdWeek || index === highlightIndex4thWeek ? 6 : 3
-              ), // 강조된 점의 크기 설정
+              ),
             },
           ],
         });
@@ -78,9 +73,16 @@ const ChartComponent = ({ selectedItem }) => {
     };
 
     fetchData();
-  }, [selectedItem]);
+  }, [selectedItem, selectedWeight, selectedDetail]);
 
   useEffect(() => {
+    // 새로운 데이터가 설정될 때 이전에 생성된 툴팁을 제거
+    const chartContainer = chartRef.current?.canvas?.parentNode;
+    if (chartContainer) {
+      const existingTooltips = chartContainer.querySelectorAll('.chart-tooltip');
+      existingTooltips.forEach(tooltip => tooltip.remove());
+    }
+
     if (chartData && chartRef.current) {
       const chart = chartRef.current;
 
@@ -90,8 +92,8 @@ const ChartComponent = ({ selectedItem }) => {
 
       if (dataIndex3rdWeek !== -1 && dataIndex4thWeek !== -1 && chart.data.datasets[1]) {
         // 고정된 위치에 7월 3주 라벨을 표시
-        const chartContainer = chart.canvas.parentNode; // 차트 컨테이너 찾기
         const tooltipEl3rdWeek = document.createElement('div');
+        tooltipEl3rdWeek.className = 'chart-tooltip';
         tooltipEl3rdWeek.style.position = 'absolute';
         tooltipEl3rdWeek.style.background = 'rgba(0, 0, 0, 0.8)';
         tooltipEl3rdWeek.style.color = '#fff';
@@ -99,14 +101,16 @@ const ChartComponent = ({ selectedItem }) => {
         tooltipEl3rdWeek.style.borderRadius = '4px';
         tooltipEl3rdWeek.style.pointerEvents = 'none';
         tooltipEl3rdWeek.style.left = '50%';
-        tooltipEl3rdWeek.style.transform = 'translateX(-100%)'; // 왼쪽에 위치
-        tooltipEl3rdWeek.style.top = '-30px'; // 차트 바로 위쪽에 위치
-        tooltipEl3rdWeek.innerHTML = `<strong>2024년 7월 3주: ${chart.data.datasets[1].data[dataIndex3rdWeek]}원</strong>`;
+        tooltipEl3rdWeek.style.transform = 'translateX(-100%)';
+        tooltipEl3rdWeek.style.top = '-40px';
+        tooltipEl3rdWeek.innerHTML = `<strong>이번주 가격: ${price}원</strong>`;
+        
 
         chartContainer.appendChild(tooltipEl3rdWeek);
 
         // 고정된 위치에 7월 4주 라벨을 표시
         const tooltipEl4thWeek = document.createElement('div');
+        tooltipEl4thWeek.className = 'chart-tooltip';
         tooltipEl4thWeek.style.position = 'absolute';
         tooltipEl4thWeek.style.background = 'rgba(0, 0, 0, 0.8)';
         tooltipEl4thWeek.style.color = '#fff';
@@ -114,20 +118,26 @@ const ChartComponent = ({ selectedItem }) => {
         tooltipEl4thWeek.style.borderRadius = '4px';
         tooltipEl4thWeek.style.pointerEvents = 'none';
         tooltipEl4thWeek.style.left = '50%';
-        tooltipEl4thWeek.style.transform = 'translateX(0%)'; // 오른쪽에 위치
-        tooltipEl4thWeek.style.top = '-30px'; // 차트 바로 위쪽에 위치
-        tooltipEl4thWeek.innerHTML = `<strong>2024년 7월 4주: ${chart.data.datasets[1].data[dataIndex4thWeek]}원</strong>`;
+        tooltipEl4thWeek.style.transform = 'translateX(0%)';
+        tooltipEl4thWeek.style.top = '-40px';
+        tooltipEl4thWeek.innerHTML = `<strong>다음주 가격(예상): ${nextWeekPrice}원</strong>`;
+        
+        // 추가: PriceInfo의 nextWeekPrice 데이터를 표시
 
         chartContainer.appendChild(tooltipEl4thWeek);
       }
     }
-  }, [chartData]);
+  }, [chartData, price, nextWeekPrice]);
+
+  if (!selectedItem || !selectedWeight || !selectedDetail) {
+    return <p>옵션을 선택해주세요</p>;
+  }
 
   if (!chartData) return <p>차트를 로드 중입니다...</p>;
 
   return (
     <div style={{ width: '600px', margin: '0 auto', padding: '20px', position: 'relative' }}>
-      <div style={{ height: '400px', position: 'relative' }}> {/* position: 'relative' 추가 */}
+      <div style={{ height: '400px', position: 'relative' }}>
         <Line 
           ref={chartRef} 
           data={chartData} 
@@ -140,7 +150,7 @@ const ChartComponent = ({ selectedItem }) => {
               },
               legend: {
                 display: true,
-                position: 'bottom', // 레전드를 차트 하단에 위치시킴
+                position: 'bottom',
               },
             },
             interaction: {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PriceInfo.css'; // CSS 파일을 따로 만들어서 스타일링 할 것입니다.
+import ChartComponent from '../chart/chart'; // ChartComponent import
 
 const PriceInfo = ({ selectedItem, selectedWeight, selectedDetail }) => {
   const [data, setData] = useState([]);
@@ -82,6 +83,17 @@ const PriceInfo = ({ selectedItem, selectedWeight, selectedDetail }) => {
           ) : (
             <p className="no-data">선택한 옵션에 대한 가격 정보를 찾을 수 없습니다.</p>
           )}
+
+          {/* ChartComponent에 여백 추가 */}
+          <div className="chart-container">
+            <ChartComponent
+              selectedItem={selectedItem}
+              selectedWeight={selectedWeight}
+              selectedDetail={selectedDetail}
+              price={price}
+              nextWeekPrice={nextWeekPrice}
+            />
+          </div>
         </>
       )}
     </div>
