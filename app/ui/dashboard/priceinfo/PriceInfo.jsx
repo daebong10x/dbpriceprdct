@@ -47,55 +47,50 @@ const PriceInfo = ({ selectedItem, selectedWeight, selectedDetail }) => {
     }
   }, [selectedItem, selectedWeight, selectedDetail, data]);
 
+  // 모든 항목이 선택되지 않았을 경우 컴포넌트 렌더링 안함
+  if (!selectedItem || !selectedWeight || !selectedDetail) {
+    return null;
+  }
+
   return (
     <div className="price-info-container">
-      {/* 3개 모두 선택되지 않았을 때 표시 */}
-      {(!selectedItem || !selectedWeight || !selectedDetail) && (
-        <p className="no-selection">옵션을 선택해주세요</p>
+      <div className="selection-info">
+        <p>[{selectedItem} {selectedWeight} {selectedDetail}]&nbsp;가격 예측 결과</p>
+      </div>
+
+      {/* 예상 변화 표시 */}
+      {forecast && (
+        <div className="forecast-info">
+          <p className="forecast-text">다음주 <span className="forecast-highlight">{forecast}</span> 예상</p>
+        </div>
       )}
 
-      {/* 3개 모두 선택되었을 때 정보 표시 */}
-      {selectedItem && selectedWeight && selectedDetail && (
-        <>
-          <div className="selection-info">
-            <p>[{selectedItem} {selectedWeight} {selectedDetail}]</p>
+      {/* 가격 정보 표시 */}
+      {price && nextWeekPrice ? (
+        <div className="price-info">
+          <div className="price-block">
+            <p className="price-title">이번주 가격</p>
+            <p className="price-detail">24년 7월 1주차 <span className="price-amount">{price}원</span></p>
           </div>
-
-          {/* 예상 변화 표시 */}
-          {forecast && (
-            <div className="forecast-info">
-              <p className="forecast-text">다음주 <span className="forecast-highlight">{forecast}</span> 예상</p>
-            </div>
-          )}
-
-          {/* 가격 정보 표시 */}
-          {price && nextWeekPrice ? (
-            <div className="price-info">
-              <div className="price-block">
-                <p className="price-title">이번주 가격</p>
-                <p className="price-detail">24년 7월 1주차 <span className="price-amount">{price}원</span></p>
-              </div>
-              <div className="price-block">
-                <p className="price-title">다음주 가격</p>
-                <p className="price-detail">24년 7월 2주차 <span className="price-amount">{nextWeekPrice}원</span></p>
-              </div>
-            </div>
-          ) : (
-            <p className="no-data">선택한 옵션에 대한 가격 정보를 찾을 수 없습니다.</p>
-          )}
-
-          {/* ChartComponent에 여백 추가 */}
-          <div className="chart-container">
-            <ChartComponent
-              selectedItem={selectedItem}
-              selectedWeight={selectedWeight}
-              selectedDetail={selectedDetail}
-              price={price}
-              nextWeekPrice={nextWeekPrice}
-            />
+          <div className="price-block">
+            <p className="price-title">다음주 가격</p>
+            <p className="price-detail">24년 7월 2주차 <span className="price-amount">{nextWeekPrice}원</span></p>
           </div>
-        </>
+        </div>
+      ) : (
+        <p className="no-data">선택한 옵션에 대한 가격 정보를 찾을 수 없습니다.</p>
       )}
+
+      {/* ChartComponent에 여백 추가 */}
+      <div className="chart-container">
+        <ChartComponent
+          selectedItem={selectedItem}
+          selectedWeight={selectedWeight}
+          selectedDetail={selectedDetail}
+          price={price}
+          nextWeekPrice={nextWeekPrice}
+        />
+      </div>
     </div>
   );
 };

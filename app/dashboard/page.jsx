@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import PriceInfo from "../ui/dashboard/priceinfo/PriceInfo";
 import Dropdown from "../ui/dashboard/dropdown/dropdown";
+import Title from "../ui/dashboard/title/Title"; // Title 컴포넌트 임포트
 
 const Page = () => {
   const [selectedItem, setSelectedItem] = useState('');
@@ -11,6 +12,7 @@ const Page = () => {
 
   return (
     <div>
+      <Title /> {/* Title 컴포넌트를 최상단에 추가 */}
       <Dropdown
         setSelectedItem={setSelectedItem}
         setSelectedWeight={setSelectedWeight}

@@ -1,26 +1,32 @@
 .price-info-container {
-    background-color: #1b1c1e; /* 어두운 배경색 */
-    padding: 20px;
+    background-color: #ffffff; /* 어두운 배경색 */
+    padding: 35px;
     border-radius: 8px;
-    color: white;
+    color: #0f1ea2;
+    margin: 40px 20px 20px 20px;
   }
   
   .selection-info p {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 20px;
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    font-size: 2em; /* 텍스트 크기 조절 */
+    font-weight: bold; /* 텍스트 굵게 */
+    margin-bottom: 20px; /* 아래쪽 여백 추가 */
+    color: #000000;
+    padding: 10px;
   }
   
   .forecast-info {
-    background-color: #2c2d30;
+    background-color: #ffffff;
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin: 0px 50px 15px 50px;
+    border: 1px solid #dfdfdf;
   }
   
   .forecast-text {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
+    
   }
   
   .forecast-highlight {
@@ -33,25 +39,30 @@
   }
   
   .price-block {
-    background-color: #2c2d30;
+    background-color: #ffffff;
     padding: 15px;
     border-radius: 8px;
     width: 48%;
+    border: 1px solid #dfdfdf;
+    margin: 0px 50px 0px 50px;
+    
   }
   
   .price-title {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
+    color: #000000;
     margin-bottom: 10px;
   }
   
   .price-detail {
-    font-size: 1em;
+    font-size: 2em;
+    font-weight: bold;
   }
   
   .price-amount {
     font-weight: bold;
-    color: #00ff00; /* 가격 색상 */
+    color: #ff9421; /* 가격 색상 */
   }
   
   .no-data, .no-selection {

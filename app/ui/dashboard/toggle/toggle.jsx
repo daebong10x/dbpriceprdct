@@ -4,7 +4,10 @@ const Toggle = ({ label }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <label className="flex items-center cursor-pointer">
+    <label 
+      className="flex items-center cursor-pointer" 
+      style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '8px' }} // 배경 색과 패딩, 둥근 모서리 추가
+    >
       <div className="relative">
         <input
           type="checkbox"
