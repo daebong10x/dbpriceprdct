@@ -21,17 +21,18 @@ const ChartComponent = ({ selectedItem, selectedWeight, selectedDetail, price, n
           return;
         }
 
-        const labels = Array.from(new Set(data.slice(1).map(row => row[0].replace(/^\d+년/, ''))));
+        // X축 레이블에서 "평년" 제거
+        const labels = Array.from(new Set(data.slice(1).map(row => row[0].replace(/^\d+년/, '').replace(/^평년/, ''))));
         const prices2023 = Array(labels.length).fill(null);
         const prices2024 = Array(labels.length).fill(null);
 
         data.slice(1).forEach(row => {
           const [date, price] = row;
-          const week = date.replace(/^\d+년/, '');
+          const week = date.replace(/^\d+년/, '').replace(/^평년/, ''); // 평년 텍스트 제거
           const index = labels.indexOf(week);
 
           if (index !== -1) {
-            if (date.includes('2023년')) {
+            if (date.includes('평년')) {
               prices2023[index] = parseInt(price);
             } else if (date.includes('2024년')) {
               prices2024[index] = parseInt(price);
@@ -39,14 +40,14 @@ const ChartComponent = ({ selectedItem, selectedWeight, selectedDetail, price, n
           }
         });
 
-        const highlightIndex3rdWeek = labels.indexOf('7월3주');
-        const highlightIndex4thWeek = labels.indexOf('7월4주');
+        const highlightIndex3rdWeek = labels.indexOf('8월2주');
+        const highlightIndex4thWeek = labels.indexOf('8월3주');
 
         setChartData({
           labels: labels,
           datasets: [
             {
-              label: `2023년 ${selectedItem} 가격`,
+              label: `평년 ${selectedItem} 가격`,
               data: prices2023,
               borderColor: 'rgba(75,192,192,1)',
               backgroundColor: 'rgba(75,192,192,0.2)',
@@ -91,8 +92,8 @@ const ChartComponent = ({ selectedItem, selectedWeight, selectedDetail, price, n
     if (chartData && chartRef.current) {
       const chart = chartRef.current;
   
-      const dataIndex3rdWeek = chartData.labels.indexOf('7월3주');
-      const dataIndex4thWeek = chartData.labels.indexOf('7월4주');
+      const dataIndex3rdWeek = chartData.labels.indexOf('8월2주');
+      const dataIndex4thWeek = chartData.labels.indexOf('8월3주');
   
       if (dataIndex3rdWeek !== -1 && dataIndex4thWeek !== -1 && chart.data.datasets[1]) {
         const tooltipEl3rdWeek = document.createElement('div');

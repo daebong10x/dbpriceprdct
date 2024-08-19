@@ -1,76 +1,115 @@
 .price-info-container {
-    background-color: #ffffff; /* 어두운 배경색 */
-    padding: 35px;
-    border-radius: 8px;
-    color: #0f1ea2;
-    margin: 40px 20px 20px 20px;
-  }
-  
-  .selection-info p {
-    text-align: center; /* 텍스트를 가운데 정렬 */
-    font-size: 2em; /* 텍스트 크기 조절 */
-    font-weight: bold; /* 텍스트 굵게 */
-    margin-bottom: 20px; /* 아래쪽 여백 추가 */
-    color: #000000;
-    padding: 10px;
-  }
-  
-  .forecast-info {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 0px 50px 15px 50px;
-    border: 1px solid #dfdfdf;
-  }
-  
-  .forecast-text {
-    font-size: 2em;
-    font-weight: bold;
-    
-  }
-  
-  .forecast-highlight {
-    color: #00aaff; /* 하이라이트 색상 */
-  }
-  
-  .price-info {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .price-block {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    width: 48%;
-    border: 1px solid #dfdfdf;
-    margin: 0px 50px 0px 50px;
-    
-  }
-  
-  .price-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #000000;
-    margin-bottom: 10px;
-  }
-  
-  .price-detail {
-    font-size: 2em;
-    font-weight: bold;
-  }
-  
-  .price-amount {
-    font-weight: bold;
-    color: #ff9421; /* 가격 색상 */
-  }
-  
-  .no-data, .no-selection {
-    text-align: center;
-    color: #ff6b6b; /* 경고 색상 */
-    font-size: 1.2em;
-  }
-  
-  .chart-container {
-  margin-top: 40px; /* 여백을 여기서 추가 */
+  background-color: #ffffff; /* 어두운 배경색 */
+  padding: 35px;
+  border-radius: 8px;
+  color: #0f1ea2;
+  margin: 40px 20px 20px 20px;
 }
+
+.selection-info p {
+  text-align: center; /* 텍스트를 가운데 정렬 */
+  font-size: 2em; /* 텍스트 크기 조절 */
+  font-weight: bold; /* 텍스트 굵게 */
+  margin-bottom: 20px; /* 아래쪽 여백 추가 */
+  color: #000000;
+  padding: 10px;
+}
+
+.forecast-info {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 0 auto 15px auto; /* 좌우 마진을 auto로 설정하여 가운데 정렬 */
+  border: 1px solid #dfdfdf;
+  width: 100%; /* 폭을 100%로 설정 */
+  max-width: 900px; /* 가격 정보와 동일한 최대 폭 설정 */
+  text-align: center; /* 텍스트를 중앙 정렬 */
+}
+
+.forecast-text {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.forecast-highlight {
+  color: #00aaff; /* 하이라이트 색상 */
+}
+
+
+.price-info {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 20px; /* 섹션 사이 간격 */
+  width: 100%; /* 전체 폭 설정 */
+  max-width: 1200px; /* 최대 폭 설정 */
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+.price-block {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  width: 45%; /* 각 블록의 너비를 줄여서 두 블록이 잘 맞도록 조정 */
+  border: 1px solid #dfdfdf;
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.price-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.price-detail {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.price-amount {
+  font-weight: bold;
+  color: #ff9421; /* 가격 색상 */
+}
+
+.no-data, .no-selection {
+  text-align: center;
+  color: #ff6b6b; /* 경고 색상 */
+  font-size: 1.2em;
+}
+
+.chart-container {
+  margin-top: 40px; /* 위쪽 여백 */
+  margin-bottom: 40px; /* 아래쪽 여백 */
+  width: 100%; /* 차트 컨테이너의 폭을 100%로 설정 */
+  max-width: 1200px; /* 가격 정보와 동일한 최대 폭 설정 */
+  padding: 0 20px; /* 좌우 여백 추가 */
+  box-sizing: border-box; /* 패딩 포함하여 전체 폭 계산 */
+  display: flex; /* flexbox 레이아웃 사용 */
+  justify-content: center; /* 자식 요소를 중앙에 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  margin-left: auto; /* 왼쪽 마진 자동 */
+  margin-right: auto; /* 오른쪽 마진 자동 */
+}
+
+.chart-container canvas {
+  max-width: 100%; /* 차트의 최대 폭을 컨테이너에 맞추도록 설정 */
+  height: auto; /* 차트 높이를 자동으로 조정 */
+  display: block; /* 차트 캔버스를 블록 요소로 설정 */
+}
+
+.arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #000; /* 화살표 색상 */
+    margin: 0 10px; /* 화살표 양쪽 여백 */
+}
+
+.arrow {
+    display: inline-block;
+    transform: scale(1.5); /* 화살표 크기 조정 */
+}
+

@@ -68,15 +68,21 @@ const PriceInfo = ({ selectedItem, selectedWeight, selectedDetail }) => {
       {/* 가격 정보 표시 */}
       {price && nextWeekPrice ? (
         <div className="price-info">
-          <div className="price-block">
-            <p className="price-title">이번주 가격</p>
-            <p className="price-detail">24년 7월 1주차 <span className="price-amount">{price}원</span></p>
-          </div>
-          <div className="price-block">
-            <p className="price-title">다음주 가격</p>
-            <p className="price-detail">24년 7월 2주차 <span className="price-amount">{nextWeekPrice}원</span></p>
-          </div>
+        <div className="price-block">
+          <p className="price-title">이번주 가격</p>
+          <p className="price-detail">24년 8월 3주차 <span className="price-amount">{price}원</span></p>
         </div>
+        
+        <div className="arrow-container">
+          <span className="arrow">→</span> {/* 화살표 추가 */}
+        </div>
+        
+        <div className="price-block">
+          <p className="price-title">다음주 가격</p>
+          <p className="price-detail">24년 8월 4주차 <span className="price-amount">{nextWeekPrice}원</span></p>
+        </div>
+      </div>
+      
       ) : (
         <p className="no-data">선택한 옵션에 대한 가격 정보를 찾을 수 없습니다.</p>
       )}

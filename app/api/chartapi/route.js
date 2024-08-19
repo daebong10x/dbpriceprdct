@@ -12,7 +12,7 @@ export async function GET(req) {
 
     const sheets = google.sheets({ version: 'v4', auth });
     const spreadsheetId = '1aAd_GYpeLXbyW0NC5pqs_MjdBE8LyAlv6-RKX6mcZzk'; // 스프레드시트 ID
-    const range = '시트12!A1:F'; // 데이터 범위 설정
+    const range = '예측가격!A1:F'; // 데이터 범위 설정
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,

@@ -1,21 +1,23 @@
-.chartContainer {
-  width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  position: relative;
-  background-color: #ffffff;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  border: 1px solid #dfdfdf;
-}
 
-.chartInnerContainer {
-  height: 400px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.chartContainer {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    background-color: #ffffff;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #dfdfdf;
+  }
+  
+  .chartInnerContainer {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
